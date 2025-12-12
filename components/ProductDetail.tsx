@@ -124,40 +124,102 @@ Could you provide more details?`;
       <div className="bg-gradient-to-br from-gray-50 via-white to-amber-50/30 min-h-screen">
         <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8 max-w-7xl">
           {/* Breadcrumb Navigation - Enhanced Mobile */}
-          <nav className="flex items-center text-xs sm:text-sm mb-4 sm:mb-6 lg:mb-8 overflow-x-auto pb-2 scrollbar-hide">
+          <nav
+            className="flex items-center gap-1 sm:gap-2 mb-4 sm:mb-6 lg:mb-8 py-2 sm:py-3"
+            aria-label="Breadcrumb"
+          >
+            {/* Back Button - Mobile Optimized */}
             <Link
               href="/"
-              className="flex items-center text-gray-600 hover:text-amber-600 transition-colors whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 
+               bg-white/80 backdrop-blur-sm rounded-lg 
+               text-gray-700 hover:text-amber-600 hover:bg-amber-50/80
+               border border-gray-200 hover:border-amber-300
+               transition-all duration-200 ease-in-out
+               shadow-sm hover:shadow-md
+               text-xs sm:text-sm font-medium
+               whitespace-nowrap"
+              aria-label="Back to home"
             >
-              <FaArrowLeft className="mr-1.5 sm:mr-2 flex-shrink-0" />
-              <span className="font-medium">Back</span>
+              <FaArrowLeft className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" />
+              <span className="hidden sm:inline">Back</span>
             </Link>
-            <span className="mx-2 sm:mx-3 text-gray-300">/</span>
-            <Link
-              href={`/category/${
-                displayProduct.category?.slug?.current ||
-                (displayProduct.category?.slug &&
-                typeof displayProduct.category.slug === "string"
-                  ? displayProduct.category.slug
-                  : "")
-              }`}
-              className="text-gray-600 hover:text-amber-600 transition-colors whitespace-nowrap"
+
+            {/* Separator */}
+            <span
+              className="text-gray-300 mx-0.5 select-none"
+              aria-hidden="true"
             >
-              {displayProduct.category?.title || "Products"}
-            </Link>
-            <span className="mx-2 sm:mx-3 text-gray-300">/</span>
-            <Link
-              href={`/products`}
-              className="text-gray-600 hover:text-amber-600 transition-colors whitespace-nowrap"
-            >
-              {"Products"}
-            </Link>
-            <span className="mx-2 sm:mx-3 text-gray-300 hidden sm:inline">
               /
             </span>
-            <span className="text-gray-800 font-medium truncate max-w-[120px] sm:max-w-xs hidden sm:inline">
-              {displayProduct.name}
-            </span>
+
+            {/* Breadcrumb Trail */}
+            <ol
+              className="flex items-center gap-1 sm:gap-2 overflow-x-auto 
+                  scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent
+                  pb-1 flex-1 min-w-0"
+            >
+              {/* Products Link */}
+              <li className="flex items-center gap-1 sm:gap-2 whitespace-nowrap">
+                <Link
+                  href="/products"
+                  className="px-2.5 py-1 sm:px-3 sm:py-1.5
+                   text-xs sm:text-sm font-medium
+                   text-gray-600 hover:text-amber-600
+                   hover:bg-amber-50/50 rounded-md
+                   transition-all duration-200
+                   border border-transparent hover:border-amber-200"
+                >
+                  Products
+                </Link>
+                <span
+                  className="text-gray-300 text-xs sm:text-sm hidden sm:inline"
+                  aria-hidden="true"
+                >
+                  /
+                </span>
+              </li>
+              {/* Category Link */}
+              <li className="flex items-center gap-1 sm:gap-2 whitespace-nowrap">
+                <Link
+                  href={`/category/${
+                    displayProduct.category?.slug?.current ||
+                    (displayProduct.category?.slug &&
+                    typeof displayProduct.category.slug === "string"
+                      ? displayProduct.category.slug
+                      : "")
+                  }`}
+                  className="px-2.5 py-1 sm:px-3 sm:py-1.5
+                   text-xs sm:text-sm font-medium
+                   text-gray-600 hover:text-amber-600
+                   hover:bg-amber-50/50 rounded-md
+                   transition-all duration-200
+                   border border-transparent hover:border-amber-200"
+                >
+                  {displayProduct.category?.title || "Products"}
+                </Link>
+                <span
+                  className="text-gray-300 text-xs sm:text-sm"
+                  aria-hidden="true"
+                >
+                  /
+                </span>
+              </li>
+
+              {/* Current Product - Desktop Only */}
+              <li className="hidden sm:flex items-center min-w-0">
+                <span
+                  className="px-3 py-1.5 text-sm font-semibold
+                   text-amber-700 bg-amber-50/70
+                   border border-amber-200 rounded-md
+                   truncate max-w-[200px] md:max-w-xs"
+                  aria-current="page"
+                  title={displayProduct.name}
+                >
+                  {displayProduct.name}
+                </span>
+              </li>
+            </ol>
           </nav>
 
           {/* Main Product Card - Mobile Optimized */}
