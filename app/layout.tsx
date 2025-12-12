@@ -3,8 +3,8 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Script from "next/script";
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import ScrollToTop from "@/components/ScrollToTop";
 export const metadata: Metadata = {
   title: "RadhaRani Handicraft – Handcrafted Marble Deity Idols",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     siteName: "RadhaRani Handicraft",
     images: [
       {
-        url: "https://radharanihandicraft.vercel.app/og-image.jpg",
+        url: "https://radharanihandicraft.vercel.app/bg-logo.png",
         width: 1200,
         height: 630,
         alt: "RadhaRani Handicraft – Handcrafted Marble Idols",
@@ -75,15 +75,18 @@ export default function RootLayout({
                 "https://www.facebook.com/radharanihandicraft",
                 "https://www.instagram.com/radharanihandicraft"
               ],
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+91 82733 66089",
-                "contactType": "Customer Service"
-              }
+"contactPoint": [
+  {
+    "@type": "ContactPoint",
+    "telephone": "+91 82733 66089",
+    "contactType": "Customer Service"
+  }
+]
+
             }
           `}
         </Script>
-        <ScrollToTop/>
+        <ScrollToTop />
         {children}
         <Footer />
       </body>

@@ -21,15 +21,15 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: product?.name,
       description: product?.description,
-      images: product?.images?.length ? [product.images[0].url] : ["/placeholder-product.jpg"],
-      url: `https://yourdomain.com/product/${slug}`,
+      images: product?.images?.length ? [product.images[0]] : ["/placeholder-product.jpg"],
+      url: `https://radharanihandicraft.vercel.app/product/${slug}`,
       type: "website",  // Correct og:type
     },
     twitter: {
       card: "summary_large_image",
       title: product?.name,
       description: product?.description,
-      images: product?.images?.length ? [product.images[0].url] : ["/placeholder-product.jpg"],
+      images: product?.images?.length ? [product.images[0]] : ["/placeholder-product.jpg"],
     },
     canonical: `https://yourdomain.com/product/${slug}`,
   };

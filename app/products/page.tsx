@@ -703,8 +703,6 @@ export default function ProductsPage() {
               </div>
             ) : (
               <>
-      
-      
                 {/* ENHANCED PRODUCT GRID - MOBILE OPTIMIZED */}
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3 sm:gap-5 lg:gap-6">
                   {currentProducts.map((product) => {
@@ -826,9 +824,11 @@ export default function ProductsPage() {
                             </div>
 
                             {/* View Details Button - MOBILE OPTIMIZED */}
-                            <button className="w-full py-1.5 sm:py-2.5 px-2 sm:px-4 text-[10px] sm:text-sm font-semibold rounded-lg sm:rounded-xl text-white bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-700 hover:to-amber-700 transition-all shadow-md hover:shadow-lg transform hover:scale-105">
-                              View
-                            </button>
+                            <Link href={`/product/${product.slug.current}`}>
+                              <button className="w-full cursor-pointer py-1.5 sm:py-2.5 px-2 sm:px-4 text-[10px] sm:text-sm font-semibold rounded-lg sm:rounded-xl text-white bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-700 hover:to-amber-700 transition-all shadow-md hover:shadow-lg transform hover:scale-105">
+                                View
+                              </button>
+                            </Link>
                           </div>
                         </div>
                       </div>

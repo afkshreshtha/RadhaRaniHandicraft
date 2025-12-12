@@ -145,6 +145,13 @@ Could you provide more details?`;
             >
               {displayProduct.category?.title || "Products"}
             </Link>
+            <span className="mx-2 sm:mx-3 text-gray-300">/</span>
+            <Link
+              href={`/products`}
+              className="text-gray-600 hover:text-amber-600 transition-colors whitespace-nowrap"
+            >
+              {"Products"}
+            </Link>
             <span className="mx-2 sm:mx-3 text-gray-300 hidden sm:inline">
               /
             </span>
