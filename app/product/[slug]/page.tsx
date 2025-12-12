@@ -21,7 +21,14 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: product?.name,
       description: product?.description,
-      images: product?.images?.length ? [product.images[0]] : ["/placeholder-product.jpg"],
+          images: [
+      {
+        url: product?.images?.length ? [product.images[0]] : ["/placeholder-product.jpg"],
+        width: 1200,
+        height: 630,
+        alt: "RadhaRani Handicraft – Handcrafted Marble Idols",
+      },
+    ],
       url: `https://radharanihandicraft.vercel.app/product/${slug}`,
       type: "website",  // Correct og:type
     },
