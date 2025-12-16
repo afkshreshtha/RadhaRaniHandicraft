@@ -343,49 +343,79 @@ Could you provide more details?`;
               )}
 
               {/* Price Section - Enhanced Mobile */}
-              <div className="mb-5 sm:mb-6 p-4 sm:p-5 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 rounded-xl border-2 border-amber-200 shadow-sm">
-                <div className="flex flex-wrap items-baseline gap-2 sm:gap-3 mb-2">
-                  <span className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900">
-                    {formatIndianCurrency(displayProduct.price)}
-                  </span>
-                  {displayProduct.actual_price && (
-                    <>
-                      <span className="text-base sm:text-lg text-gray-500 line-through">
-                        {formatIndianCurrency(displayProduct.actual_price)}
-                      </span>
-                      <span className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs sm:text-sm font-bold px-2 py-1 rounded-full border border-green-300">
-                        <svg
-                          className="w-3 h-3"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        Save{" "}
-                        {Math.round(
-                          ((displayProduct.actual_price -
-                            displayProduct.price) /
-                            displayProduct.actual_price) *
-                            100
-                        )}
-                        %
-                      </span>
-                    </>
-                  )}
-                </div>
-                {displayProduct.actual_price && (
-                  <p className="text-xs sm:text-sm text-green-700 font-semibold">
-                    You save{" "}
-                    {formatIndianCurrency(
-                      displayProduct.actual_price - displayProduct.price
-                    )}
-                  </p>
-                )}
-              </div>
+    <div className="relative overflow-hidden rounded-2xl border border-amber-200/60 bg-gradient-to-br from-white via-amber-50/30 to-orange-50/40 p-6 shadow-lg shadow-amber-100/50 backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:shadow-amber-200/40 sm:p-8">
+  {/* Decorative Elements */}
+  <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-gradient-to-br from-amber-200/20 to-orange-200/20 blur-3xl" />
+  <div className="absolute -bottom-8 -left-8 h-24 w-24 rounded-full bg-gradient-to-br from-yellow-200/20 to-amber-200/20 blur-2xl" />
+  
+  <div className="relative">
+    {/* Main Price Display */}
+    <div className="mb-4 flex flex-wrap items-center gap-3">
+      <div className="flex items-baseline gap-2">
+        <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-sm font-medium uppercase tracking-wide text-transparent">
+          Starting from
+        </span>
+        <span className="text-4xl font-black tracking-tight text-gray-900 sm:text-5xl">
+          {formatIndianCurrency(displayProduct.price)}
+        </span>
+      </div>
+      
+      {/* Discount Badge & Original Price */}
+      {displayProduct.actual_price && (
+        <div className="flex flex-wrap items-center gap-2.5">
+          <span className="text-lg font-medium text-gray-400 line-through sm:text-xl">
+            {formatIndianCurrency(displayProduct.actual_price)}
+          </span>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 px-3 py-1.5 text-xs font-bold text-white shadow-md shadow-green-200/50 sm:text-sm">
+            <svg
+              className="h-3.5 w-3.5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clipRule="evenodd"
+              />
+            </svg>
+            {Math.round(
+              ((displayProduct.actual_price - displayProduct.price) /
+                displayProduct.actual_price) *
+                100
+            )}% OFF
+          </span>
+        </div>
+      )}
+    </div>
+
+    {/* Divider */}
+    <div className="my-4 h-px w-full bg-gradient-to-r from-transparent via-amber-200 to-transparent" />
+
+    {/* Price Details */}
+    <div className="flex items-start gap-2 text-sm text-gray-600">
+      <svg
+        className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-500"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+      <p className="leading-relaxed">
+        Price shown is for the displayed size.{" "}
+        <span className="font-medium text-gray-700">
+          Final pricing varies by size, finish & delivery location.
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+
 
               {/* Quantity Selector - Mobile Optimized */}
               <div className="mb-5 sm:mb-6">
@@ -521,7 +551,7 @@ Could you provide more details?`;
                   className="w-full flex items-center justify-center bg-gradient-to-r from-green-600 via-green-500 to-green-600 hover:from-green-700 hover:via-green-600 hover:to-green-700 text-white font-bold text-base sm:text-lg py-3.5 sm:py-4 px-6 rounded-xl transition-all duration-300 gap-2.5 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:scale-95"
                 >
                   <FaWhatsapp className="text-xl sm:text-2xl" />
-                  <span>Buy Now on WhatsApp</span>
+                  <span>Enquire on WhatsApp</span>
                 </button>
               </div>
 
