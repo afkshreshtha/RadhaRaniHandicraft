@@ -9,13 +9,10 @@ import { formatDimensions } from "@/lib/formatDimensions";
 import Link from "next/link";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import { useQuery } from "@tanstack/react-query";
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [materials, setMaterials] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
+ 
   // Filter states
   const [search, setSearch] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -47,37 +44,29 @@ export default function ProductsPage() {
     { value: "price-high", label: "Price: High to Low" },
     { value: "newest", label: "Newest" },
   ];
+  const { data: categories = [] } = useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      return await client.fetch(`*[_type == "category"] { _id, title }`);
+    },
+  });
 
-  // Fetch products, categories, and materials on component mount
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch categories
-        const categoriesData = await client.fetch(`*[_type == "category"] {
-          _id,
-          title
-        }`);
-        setCategories(categoriesData);
+  // Fetch materials
+  const { data: materials = [] } = useQuery({
+    queryKey: ['materials'],
+    queryFn: async () => {
+      return await client.fetch(`*[_type == "Material"] { _id, title }`);
+    },
+  });
 
-        // Fetch materials
-        const materialsData = await client.fetch(`*[_type == "Material"] {
-          _id,
-          title
-        }`);
-        setMaterials(materialsData);
+  // Fetch products
+  const { data: products = [], isLoading } = useQuery({
+    queryKey: ['products'],
+    queryFn: async () => {
+      return await client.fetch(getAllProductsQuery);
+    },
+  });
 
-        // Fetch products with referenced data
-        const productsData = await client.fetch(getAllProductsQuery);
-        setProducts(productsData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   // Toggle handlers for filters
   const toggleCategory = (categoryId) => {
@@ -105,10 +94,6 @@ export default function ProductsPage() {
     setCurrentPage(1);
   };
 
-  const selectPriceRange = (range) => {
-    setPriceRange(range);
-    setCurrentPage(1);
-  };
 
   // Reset all filters
   const resetFilters = () => {

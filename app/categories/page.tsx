@@ -1,36 +1,43 @@
 "use client";
 
 import { client } from '@/sanity.cli';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Sparkles, ArrowRight, Package, Grid3x3 } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+
+// Type definition for Category
+interface Category {
+  slug: { current: string } | string;
+  title: string;
+  description?: string;
+  image?: string;
+  imageDimensions?: {
+    aspectRatio: number;
+  };
+}
+
+// Fetch function outside component
+const fetchCategories = async (): Promise<Category[]> => {
+  return await client.fetch(`*[_type == "category"] {
+    slug,
+    title,
+    description,
+    "image": image.asset->url,
+    "imageDimensions": image.asset->metadata.dimensions
+  }`);
+};
 
 const CategoryPage = () => {
-  const [categories, setCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const categoriesData = await client.fetch(`*[_type == "category"] {
-          slug,
-          title,
-          description,
-          "image": image.asset->url,
-          "imageDimensions": image.asset->metadata.dimensions
-        }`);
-        setCategories(categoriesData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  // Replace useState and useEffect with useQuery
+  const { data: categories = [], isLoading } = useQuery({
+    queryKey: ['categories'],
+    queryFn: fetchCategories,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    cacheTime: 10 * 60 * 1000, // 10 minutes
+  });
 
   if (isLoading) {
     return (
@@ -144,8 +151,8 @@ const CategoryPage = () => {
                 
                 return (
                   <Link 
-                    href={`/category/${category.slug?.current || category.slug}`} 
-                    key={category.slug?.current || category.slug}
+                    href={`/category/${typeof category.slug === 'string' ? category.slug : category.slug.current}`} 
+                    key={typeof category.slug === 'string' ? category.slug : category.slug.current}
                     className="group"
                     style={{
                       animationDelay: `${0.5 + index * 0.05}s`,
@@ -173,7 +180,7 @@ const CategoryPage = () => {
                         {/* Hover Gradient Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                        {/* Category Count Badge (Optional - if you have product count) */}
+                        {/* Category Count Badge */}
                         <div className="absolute top-3 right-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           Explore
                         </div>

@@ -6,6 +6,7 @@ import { client } from "@/sanity.cli";
 import imageUrlBuilder from "@sanity/image-url";
 import { useEffect, useState } from "react";
 import { Star, Sparkles, ArrowRight, Tag } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 
 interface Product {
   _id: string;
@@ -50,55 +51,49 @@ const formatPrice = (price: string): string => {
   }).format(parseFloat(price));
 };
 
-export default function FeaturedProducts() {
-  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchFeaturedProducts = async () => {
-      try {
-        const query = `*[_type == "product" && featured == true] {
-          _id,
-          name,
-          price,
-          actual_price,
-          paintingStyle,
-          images,
-          category->{
-            title,
-            slug
-          },
-          featured,
-          dimensions {
-            length {
-              value,
-              unit->{title, symbol}
-            },
-            width {
-              value,
-              unit->{title, symbol}
-            },
-            height {
-              value,
-              unit->{title, symbol}
-            }
-          },
-          slug,
-        }[0...8]`; // Increased to 8 for better grid
-
-        const products = await client.fetch(query);
-        setFeaturedProducts(products);
-      } catch (error) {
-        console.error("Error fetching featured products:", error);
-      } finally {
-        setLoading(false);
+const fetchFeaturedProducts = async (): Promise<Product[]> => {
+  const query = `*[_type == "product" && featured == true] {
+    _id,
+    name,
+    price,
+    actual_price,
+    paintingStyle,
+    images,
+    category->{
+      title,
+      slug
+    },
+    featured,
+    dimensions {
+      length {
+        value,
+        unit->{title, symbol}
+      },
+      width {
+        value,
+        unit->{title, symbol}
+      },
+      height {
+        value,
+        unit->{title, symbol}
       }
-    };
+    },
+    slug,
+  }[0...8]`;
 
-    fetchFeaturedProducts();
-  }, []);
+  return await client.fetch(query);
+};
+export default function FeaturedProducts() {
 
-  if (loading) {
+  const { data: featuredProducts = [], isLoading } = useQuery({
+    queryKey: ['featuredProducts'],
+    queryFn: fetchFeaturedProducts,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    cacheTime: 10 * 60 * 1000, // 10 minutes
+  });
+
+
+  if (isLoading) {
     return (
       <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-white to-yellow-50 overflow-hidden">
         {/* Decorative background elements */}
