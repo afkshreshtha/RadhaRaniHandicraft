@@ -1,4 +1,4 @@
-'use client';
+pu pnb pi'use cli'use 
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -154,7 +154,7 @@ export default function Navbar() {
         <div className="bg-gradient-to-r from-yellow-600 to-amber-600 px-6 py-5 flex items-center justify-between">
           <div className="relative w-32 h-10">
             <Image
-              src="/logo.png" // White version of logo for colored background
+              src="/bg-logo.png" // White version of logo for colored background
               alt="RadhaRani Handicraft"
               fill
               className="" // Makes logo white

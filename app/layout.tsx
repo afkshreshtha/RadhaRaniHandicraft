@@ -10,7 +10,7 @@ import { Providers } from "./provider/providers";
 export const metadata: Metadata = {
   title: "RadhaRani Handicraft – Handcrafted Marble Deity Idols",
   description:
-    "Discover sacred handcrafted marble idols of Hindu deities like Krishna, Shiva, Ganesh, and more. Perfect for homes, temples, and gifts.",
+    "Discover premium handcrafted marble idols and murtis of Hindu deities like Radha Krishna, Shiva, Ganesh, and more by Radharani Handicrafts. Ideal for home temples, mandirs, and devotional gifting.",
   keywords:
     "marble murti, deity idols, hindu god statues, marble god idols, handmade idols, radharanihandicraft",
   authors: [{ name: "radharanihandicraft" }],
@@ -25,20 +25,20 @@ export const metadata: Metadata = {
   },
   themeColor: "#ffffff",
   alternates: {
-    canonical: "https://radharanihandicraft.vercel.app",
+    canonical: "https://radharanihandicrafts.com",
     languages: {
-      "en-US": "https://radharanihandicraft.vercel.app",
+      "en-US": "https://radharanihandicrafts.com",
     },
   },
   openGraph: {
     title: "RadhaRani Handicraft – Handcrafted Marble Idols",
     description:
       "Elegant and devotional marble deity idols for your home and temple.",
-    url: "https://radharanihandicraft.vercel.app",
+    url: "https://radharanihandicraft.com",
     siteName: "RadhaRani Handicraft",
     images: [
       {
-        url: "https://radharanihandicraft.vercel.app/bg-logo.png",
+        url: "https://radharanihandicraft.com/bg-logo.png",
         width: 1200,
         height: 630,
         alt: "RadhaRani Handicraft – Handcrafted Marble Idols",
