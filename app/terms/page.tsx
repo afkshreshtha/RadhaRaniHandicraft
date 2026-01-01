@@ -23,7 +23,7 @@ export default function TermsAndConditions() {
         <p className="mb-4">Last Updated: April 25, 2025</p>
 
         <h2 className="text-xl font-semibold mt-6 mb-2">Introduction</h2>
-        <p className="mb-4">Welcome to our handcrafted Divmurti store. These Terms and Conditions govern your use of our website and purchase of our products. By accessing our website and placing an order, you agree to be bound by these Terms and Conditions.</p>
+        <p className="mb-4">Welcome to our handcrafted RadhaRani Handicrafts store. These Terms and Conditions govern your use of our website and purchase of our products. By accessing our website and placing an order, you agree to be bound by these Terms and Conditions.</p>
 
         <h2 className="text-xl font-semibold mt-6 mb-2">Ordering Process</h2>
         <h3 className="text-lg font-medium mt-4 mb-2">Order Placement</h3>
