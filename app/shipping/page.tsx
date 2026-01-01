@@ -58,9 +58,6 @@ export default function ShippingPolicy() {
         <h2 className="text-xl font-semibold mt-6 mb-2">Order Tracking</h2>
         <p className="mb-4">Once your order has been shipped, we will provide you with a tracking number via WhatsApp. You can use this number to track your package through the courier's website or app.</p>
 
-        <h2 className="text-xl font-semibold mt-6 mb-2">Insurance</h2>
-        <p className="mb-4">Given the value of our artifacts, we offer shipping insurance on all orders. For items exceeding certain value thresholds, insurance is mandatory. The cost of insurance is included in the shipping fee provided during checkout.</p>
-
         <h2 className="text-xl font-semibold mt-6 mb-2">Shipping Restrictions</h2>
         <p className="mb-4">We currently ship to most countries worldwide. However, there may be certain regions where we cannot ship due to logistical constraints or local regulations. If we are unable to ship to your location, we will inform you during the ordering process.</p>
 
