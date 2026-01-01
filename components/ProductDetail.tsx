@@ -378,11 +378,9 @@ Could you provide more details?`;
 
                   {/* Enhanced Discount Badge */}
                   {discount > 0 && (
-<div className="absolute top-3 left-3 bg-gradient-to-br from-red-600 via-red-500 to-pink-600 text-white text-sm sm:text-base font-black px-4 py-2 rounded-xl shadow-2xl animate-bounce-slow flex items-center gap-2">
-
-  <span>{discount}% OFF</span>
-</div>
-
+                    <div className="absolute top-3 left-3 bg-gradient-to-br from-red-600 via-red-500 to-pink-600 text-white text-sm sm:text-base font-black px-4 py-2 rounded-xl shadow-2xl animate-bounce-slow flex items-center gap-2">
+                      <span>{discount}% OFF</span>
+                    </div>
                   )}
 
                   {/* Featured Badge */}
@@ -464,8 +462,6 @@ Could you provide more details?`;
                 <div className="relative">
                   {/* Price Header */}
                   <div className="flex items-center gap-2 mb-4">
-
-
                     <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-sm font-bold uppercase tracking-widest text-transparent">
                       Starting from
                     </span>

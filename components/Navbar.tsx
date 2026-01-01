@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import { Menu, X, Phone, ChevronDown } from 'lucide-react';
+import Link from "next/link";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { Menu, X, Phone, ChevronDown } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,87 +13,89 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Close mobile menu when clicking outside
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isOpen]);
 
   return (
     <>
-      <nav 
+      <nav
         className={`sticky top-0 z-50 transition-all duration-300 ${
-          scrolled 
-            ? 'bg-white/98 backdrop-blur-lg shadow-lg border-b-2 border-amber-100' 
-            : 'bg-white border-b border-amber-100/50'
+          scrolled
+            ? "bg-white/98 backdrop-blur-lg shadow-lg border-b-2 border-amber-100"
+            : "bg-white border-b border-amber-100/50"
         }`}
       >
         <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
           <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
-            
             {/* Logo - Responsive Image */}
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="relative flex-shrink-0 group"
               aria-label="RadhaRani Handicraft Home"
             >
-              <div className={`relative transition-all duration-300 ${
-                scrolled 
-                  ? 'w-32 h-10 sm:w-40 sm:h-12 lg:w-48 lg:h-14' 
-                  : 'w-36 h-12 sm:w-44 sm:h-14 lg:w-52 lg:h-16'
-              }`}>
+              <div
+                className={`relative transition-all duration-300 ${
+                  scrolled
+                    ? "w-32 h-32 sm:w-36 sm:h-36 lg:w-40 lg:h-40"
+                    : "w-36 h-36 sm:w-40 sm:h-40 lg:w-48 lg:h-48"
+                }`}
+              >
                 <Image
-                  src="/logo.png" // Replace with your logo path
+                  src="/bg-logo.png"
                   alt="RadhaRani Handicraft - Authentic Marble Deities"
                   fill
-                  className="object-contain object-left transition-transform duration-300 group-hover:scale-105"
+                  style={{ objectFit: "contain", objectPosition: "left" }}
+                  className="transition-transform duration-300 group-hover:scale-105"
                   priority
-                  sizes="(max-width: 640px) 144px, (max-width: 1024px) 176px, 500px"
+                  sizes="(max-width: 640px) 144px, (max-width: 1024px) 160px, 192px"
                 />
               </div>
-              
+
               {/* Optional: Glowing effect on hover */}
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/0 via-amber-400/20 to-yellow-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl -z-10" />
             </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
-              <Link 
-                href="/products" 
+              <Link
+                href="/products"
                 className="relative px-4 py-2 text-gray-700 hover:text-amber-700 font-semibold text-base transition-colors duration-200 group"
               >
                 Products
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-600 to-amber-600 transition-all duration-300 group-hover:w-full rounded-full"></span>
               </Link>
-              
-              <Link 
-                href="/categories" 
+
+              <Link
+                href="/categories"
                 className="relative px-4 py-2 text-gray-700 hover:text-amber-700 font-semibold text-base transition-colors duration-200 group"
               >
                 Categories
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-600 to-amber-600 transition-all duration-300 group-hover:w-full rounded-full"></span>
               </Link>
-              
-              <Link 
-                href="/about" 
+
+              <Link
+                href="/about"
                 className="relative px-4 py-2 text-gray-700 hover:text-amber-700 font-semibold text-base transition-colors duration-200 group"
               >
                 About Us
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-600 to-amber-600 transition-all duration-300 group-hover:w-full rounded-full"></span>
               </Link>
 
-              <Link 
-                href="/our-stores" 
+              <Link
+                href="/our-stores"
                 className="relative px-4 py-2 text-gray-700 hover:text-amber-700 font-semibold text-base transition-colors duration-200 group"
               >
                 Our Stores
@@ -112,17 +114,17 @@ export default function Navbar() {
               >
                 <Phone className="w-4 h-4" />
                 <span>WhatsApp</span>
-                
+
                 {/* Shimmer effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               </a>
             </div>
 
             {/* Mobile/Tablet menu toggle */}
-            <button 
-              onClick={() => setIsOpen(!isOpen)} 
+            <button
+              onClick={() => setIsOpen(!isOpen)}
               className="lg:hidden p-2 rounded-xl text-gray-700 hover:text-amber-700 hover:bg-amber-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500 border-2 border-transparent hover:border-amber-200"
-              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >
               {isOpen ? (
@@ -137,7 +139,7 @@ export default function Navbar() {
 
       {/* Mobile/Tablet Menu Overlay */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
@@ -145,23 +147,32 @@ export default function Navbar() {
       )}
 
       {/* Mobile/Tablet Menu Drawer */}
-      <div 
+      <div
         className={`fixed top-0 right-0 h-full w-full sm:w-96 bg-white z-50 transform transition-transform duration-300 ease-in-out lg:hidden shadow-2xl ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
+          isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Mobile Header */}
         <div className="bg-gradient-to-r from-yellow-600 to-amber-600 px-6 py-5 flex items-center justify-between">
-          <div className="relative w-32 h-10">
+          <div
+            className={`relative transition-all duration-300 ${
+              scrolled
+                ? "w-32 h-32 sm:w-36 sm:h-36 lg:w-40 lg:h-40"
+                : "w-36 h-36 sm:w-40 sm:h-40 lg:w-48 lg:h-48"
+            }`}
+          >
             <Image
-              src="/bg-logo.png" // White version of logo for colored background
-              alt="RadhaRani Handicraft"
+              src="/bg-logo.png"
+              alt="RadhaRani Handicraft - Authentic Marble Deities"
               fill
-              className="" // Makes logo white
-              sizes="128px"
+              style={{ objectFit: "contain", objectPosition: "left" }}
+              className="transition-transform duration-300 group-hover:scale-105"
+              priority
+              sizes="(max-width: 640px) 144px, (max-width: 1024px) 160px, 192px"
             />
           </div>
-          <button 
+
+          <button
             onClick={() => setIsOpen(false)}
             className="p-2 rounded-full text-white hover:bg-white/20 transition-colors"
             aria-label="Close menu"
@@ -173,26 +184,26 @@ export default function Navbar() {
         {/* Mobile Navigation Links */}
         <nav className="px-6 py-6 h-[calc(100%-80px)] overflow-y-auto">
           <div className="flex flex-col space-y-2">
-            <Link 
-              href="/products" 
+            <Link
+              href="/products"
               onClick={() => setIsOpen(false)}
               className="group flex items-center justify-between px-4 py-4 text-gray-800 hover:text-amber-700 font-semibold text-base rounded-xl hover:bg-amber-50 transition-all duration-200 border-2 border-transparent hover:border-amber-200"
             >
               <span>Products</span>
               <ChevronDown className="w-5 h-5 -rotate-90 text-amber-600 opacity-0 group-hover:opacity-100 transition-opacity" />
             </Link>
-            
-            <Link 
-              href="/categories" 
+
+            <Link
+              href="/categories"
               onClick={() => setIsOpen(false)}
               className="group flex items-center justify-between px-4 py-4 text-gray-800 hover:text-amber-700 font-semibold text-base rounded-xl hover:bg-amber-50 transition-all duration-200 border-2 border-transparent hover:border-amber-200"
             >
               <span>Categories</span>
               <ChevronDown className="w-5 h-5 -rotate-90 text-amber-600 opacity-0 group-hover:opacity-100 transition-opacity" />
             </Link>
-            
-            <Link 
-              href="/about" 
+
+            <Link
+              href="/about"
               onClick={() => setIsOpen(false)}
               className="group flex items-center justify-between px-4 py-4 text-gray-800 hover:text-amber-700 font-semibold text-base rounded-xl hover:bg-amber-50 transition-all duration-200 border-2 border-transparent hover:border-amber-200"
             >
@@ -200,8 +211,8 @@ export default function Navbar() {
               <ChevronDown className="w-5 h-5 -rotate-90 text-amber-600 opacity-0 group-hover:opacity-100 transition-opacity" />
             </Link>
 
-            <Link 
-              href="/our-stores" 
+            <Link
+              href="/our-stores"
               onClick={() => setIsOpen(false)}
               className="group flex items-center justify-between px-4 py-4 text-gray-800 hover:text-amber-700 font-semibold text-base rounded-xl hover:bg-amber-50 transition-all duration-200 border-2 border-transparent hover:border-amber-200"
             >
@@ -224,7 +235,7 @@ export default function Navbar() {
             >
               <Phone className="w-5 h-5" />
               <span>Contact via WhatsApp</span>
-              
+
               {/* Shimmer effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
             </a>
@@ -236,7 +247,8 @@ export default function Navbar() {
                 We're Here to Help!
               </h3>
               <p className="text-sm text-gray-700 leading-relaxed">
-                Have questions about our handcrafted marble deities? Reach out anytime!
+                Have questions about our handcrafted marble deities? Reach out
+                anytime!
               </p>
             </div>
           </div>
