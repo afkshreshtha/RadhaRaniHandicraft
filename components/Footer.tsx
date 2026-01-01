@@ -252,13 +252,7 @@ export default function Footer() {
                 Shipping Policy
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-amber-500 group-hover:w-full transition-all duration-300 rounded-full" />
               </Link>
-              <Link 
-                href="/return-policy" 
-                className="hover:text-amber-400 transition-colors duration-200 relative group"
-              >
-                Return Policy
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-amber-500 group-hover:w-full transition-all duration-300 rounded-full" />
-              </Link>
+          
             </div>
           </div>
 
