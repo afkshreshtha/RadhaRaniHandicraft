@@ -2,61 +2,91 @@ import { getProductBySlugQuery } from "@/lib/queries";
 import { client } from "@/sanity.cli";
 import { ProductDetail } from "@/components/ProductDetail";
 
+const SITE_BASE_URL = "https://radharanihandicrafts.com";
+const PLACEHOLDER_IMAGE = "/placeholder-product.jpg";
+const SITE_NAME = "RadhaRani Handicrafts";
+const DEFAULT_TITLE = "Handcrafted Marble Deity Idols | RadhaRani Handicrafts";
+const DEFAULT_DESCRIPTION =
+  "Handcrafted by Jaipur's master artisans, our marble deities embody centuries of sacred tradition with authentic marble.";
+
 export async function generateMetadata({ params }) {
-  const slug = params.slug;
+  const awaitedParams =
+    (params ?? {}) && typeof params.then === "function" ? await params : params;
+  const slug = String(awaitedParams?.slug ?? "").trim();
 
   let product = null;
 
   try {
     const query = getProductBySlugQuery(slug);
     product = await client.fetch(query);
-  } catch (err) {
-    console.error(err);
+  } catch (e) {
+    console.error(`Error fetching product metadata for slug: ${slug}`, e);
   }
 
-  const canonicalUrl = `https://radharanihandicrafts.com/products/${slug}`;
-  const image =
-    product?.images?.length
-      ? product.images[0]
-      : "https://radharanihandicrafts.com/placeholder-product.jpg";
+  const title = product?.name
+    ? `${product.name} | ${SITE_NAME}`
+    : DEFAULT_TITLE;
+
+  const description =
+    product?.description?.slice(0, 160) || DEFAULT_DESCRIPTION;
+
+  const images =
+    Array.isArray(product?.images) && product.images.length > 0
+      ? product.images
+      : [PLACEHOLDER_IMAGE];
+  const imageUrl = images[0]?.startsWith("http")
+    ? images[0]
+    : `${SITE_BASE_URL}${images[0]}`;
+
+  const ogUrl = `${SITE_BASE_URL}/product/${slug}`;
 
   return {
-    title: product?.name || "Product Detail | Radha Rani Handicrafts",
-    description:
-      product?.description ||
-      "Handcrafted marble idols by Radha Rani Handicrafts.",
-
-    alternates: {
-      canonical: canonicalUrl, // ✅ CORRECT PLACE
-    },
+    title,
+    description,
+    keywords:
+      product?.tags?.join(", ") ||
+      "marble idols, handcrafted deities, Jaipur marble crafts",
 
     openGraph: {
-      title: product?.name,
-      description: product?.description,
-      url: canonicalUrl, // ✅ MATCHES CANONICAL
-      siteName: "Radha Rani Handicrafts",
+      title: product?.name || DEFAULT_TITLE,
+      description,
+      type: "website", // Changed from 'product' to 'website'
+      url: ogUrl,
+      siteName: SITE_NAME,
+      locale: "en_IN",
       images: [
         {
-          url: image,
+          url: imageUrl,
           width: 1200,
           height: 630,
-          alt: product?.name,
+          alt: product?.name || "Handcrafted Marble Deity Idol",
         },
       ],
-      type: "product",
     },
 
     twitter: {
       card: "summary_large_image",
-      title: product?.name,
-      description: product?.description,
-      images: [image],
+      title: product?.name || DEFAULT_TITLE,
+      description,
+      images: [imageUrl],
+    },
+
+    alternates: {
+      canonical: ogUrl,
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+      maxImagePreview: "large",
+      maxSnippet: -1,
+      maxVideoPreview: -1,
     },
   };
-          }
+}
 
 export default async function ProductDetailPage({ params }) {
-  const awaitedParams = await params;  // Await params here
+  const awaitedParams = await params;
   const slug = awaitedParams.slug;
 
   let product = null;
@@ -70,5 +100,43 @@ export default async function ProductDetailPage({ params }) {
     }
   }
 
-  return <ProductDetail product={product} />;
+  // Build JSON-LD structured data
+  const jsonLd = product
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: product.name,
+        description: product.description,
+        image:
+          Array.isArray(product.images) && product.images.length > 0
+            ? product.images[0]
+            : `${SITE_BASE_URL}${PLACEHOLDER_IMAGE}`,
+        url: `${SITE_BASE_URL}/product/${slug}`,
+        brand: {
+          "@type": "Brand",
+          name: SITE_NAME,
+        },
+        ...(product.price && {
+          offers: {
+            "@type": "Offer",
+            price: product.price,
+            priceCurrency: "INR",
+            availability: "https://schema.org/InStock",
+            url: `${SITE_BASE_URL}/product/${slug}`,
+          },
+        }),
+      }
+    : null;
+
+  return (
+    <>
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
+      <ProductDetail product={product} />
+    </>
+  );
 }

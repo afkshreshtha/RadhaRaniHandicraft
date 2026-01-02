@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
-import ScrollToTop from "@/components/ScrollToTop";
 import { Providers } from "./provider/providers";
 export const metadata: Metadata = {
   title: "RadhaRani Handicraft – Handcrafted Marble Deity Idols",
@@ -87,11 +86,9 @@ export default function RootLayout({
             }
           `}
         </Script>
-       
-        <Providers>
-         {children}  
-        </Providers>
-       
+
+        <Providers>{children}</Providers>
+
         <Footer />
       </body>
     </html>
