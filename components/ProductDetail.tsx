@@ -293,20 +293,6 @@ Could you provide more details?`;
 
             {/* Share & Favorite Buttons */}
             <div className="flex items-center gap-2 flex-shrink-0">
-              <button
-                onClick={() => setIsFavorite(!isFavorite)}
-                className="p-2 sm:p-2.5 bg-white/90 backdrop-blur-sm rounded-xl 
-                 border-2 border-gray-200 hover:border-red-300
-                 transition-all duration-300 shadow-sm hover:shadow-md
-                 transform hover:scale-110"
-                aria-label="Add to favorites"
-              >
-                {isFavorite ? (
-                  <IoHeart className="w-5 h-5 text-red-500 animate-pulse" />
-                ) : (
-                  <IoHeartOutline className="w-5 h-5 text-gray-600 hover:text-red-500" />
-                )}
-              </button>
 
               <div className="relative">
                 <button

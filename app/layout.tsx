@@ -87,7 +87,12 @@ export default function RootLayout({
           `}
         </Script>
 
-        <Providers>{children}</Providers>
+        <Providers>
+
+        <main className="pt-16 sm:pt-20 lg:pt-24">
+          {children}
+        </main>
+          </Providers>
 
         <Footer />
       </body>
