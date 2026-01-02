@@ -46,12 +46,12 @@ export default function Navbar() {
               className="relative flex-shrink-0 group"
               aria-label="RadhaRani Handicraft Home"
             >
-             <div className="w-32 h-16 sm:w-40 sm:h-20 md:w-48 md:h-20 relative">
+             <div className="w-28 h-20 sm:w-36 sm:h-24 md:w-44 md:h-28 relative">  <!-- Bigger rectangle -->
   <Image
-    src="/bg-logo.png"  // Or your new logo path
-    alt="RadhaRani Handicrafts - Authentic Marble Deities"
+    src="/bg-logo.png"
+    alt="RadhaRani Handicrafts"
     fill
-    className="object-contain object-top p-2"  // Padding prevents edge clipping
+    className="object-contain object-center p-1"  <!-- Less padding if needed -->
     priority
   />
 </div>
