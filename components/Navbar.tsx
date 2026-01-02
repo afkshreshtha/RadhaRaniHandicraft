@@ -46,23 +46,15 @@ export default function Navbar() {
               className="relative flex-shrink-0 group"
               aria-label="RadhaRani Handicraft Home"
             >
-              <div
-                className={`relative transition-all duration-300 ${
-                  scrolled
-                    ? "w-32 h-32 sm:w-36 sm:h-36 lg:w-40 lg:h-40"
-                    : "w-36 h-36 sm:w-40 sm:h-40 lg:w-48 lg:h-48"
-                }`}
-              >
-                <Image
-                  src="/bg-logo.png"
-                  alt="RadhaRani Handicraft - Authentic Marble Deities"
-                  fill
-                  style={{ objectFit: "contain", objectPosition: "left" }}
-                  className="transition-transform duration-300 group-hover:scale-105"
-                  priority
-                  sizes="(max-width: 640px) 144px, (max-width: 1024px) 160px, 192px"
-                />
-              </div>
+             <div className="w-32 h-16 sm:w-40 sm:h-20 md:w-48 md:h-20 relative">
+  <Image
+    src="/bg-logo.png"  // Or your new logo path
+    alt="RadhaRani Handicrafts - Authentic Marble Deities"
+    fill
+    className="object-contain object-top p-2"  // Padding prevents edge clipping
+    priority
+  />
+</div>
 
               {/* Optional: Glowing effect on hover */}
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/0 via-amber-400/20 to-yellow-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl -z-10" />
