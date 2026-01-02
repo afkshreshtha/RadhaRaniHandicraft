@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "Discover premium handcrafted marble idols and murtis of Hindu deities like Radha Krishna, Shiva, Ganesh, and more by Radharani Handicrafts. Ideal for home temples, mandirs, and devotional gifting.",
   keywords:
     "marble murti, deity idols, hindu god statues, marble god idols, handmade idols, radharanihandicraft",
-  authors: [{ name: "radharanihandicraft" }],
+  authors: [{ name: "radharanihandicrafts" }],
   viewport: "width=device-width, initial-scale=1",
   robots: {
     index: true,
@@ -34,14 +34,14 @@ export const metadata: Metadata = {
     title: "RadhaRani Handicraft – Handcrafted Marble Idols",
     description:
       "Elegant and devotional marble deity idols for your home and temple.",
-    url: "https://radharanihandicraft.com",
-    siteName: "RadhaRani Handicraft",
+    url: "https://radharanihandicrafts.com",
+    siteName: "RadhaRani Handicrafts",
     images: [
       {
-        url: "https://radharanihandicraft.com/bg-logo.png",
+        url: "https://radharanihandicrafts.com/bg-logo.png",
         width: 1200,
         height: 630,
-        alt: "RadhaRani Handicraft – Handcrafted Marble Idols",
+        alt: "RadhaRani Handicrafts – Handcrafted Marble Idols",
       },
     ],
     locale: "en_US",
@@ -70,8 +70,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "RadhaRani Handicraft",
-              "url": "https://radharanihandicraft.vercel.app",
-              "logo": "https://radharanihandicraft.vercel.app/logo.png",
+              "url": "https://radharanihandicraft.com",
+              "logo": "https://radharanihandicrafts.com/bg-logo.png",
               "sameAs": [
                 "https://www.facebook.com/radharanihandicraft",
                 "https://www.instagram.com/radharanihandicraft"
