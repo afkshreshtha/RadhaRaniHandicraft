@@ -3,17 +3,57 @@ import { client } from "@/sanity.cli";
 import { ProductDetail } from "@/components/ProductDetail";
 
 export async function generateMetadata({ params }) {
-  const awaitedParams = await params;  // Await params here
-  const slug = awaitedParams.slug;
+  const slug = params.slug;
 
   let product = null;
 
   try {
     const query = getProductBySlugQuery(slug);
     product = await client.fetch(query);
-  } catch {
-    // handle error
+  } catch (err) {
+    console.error(err);
   }
+
+  const canonicalUrl = `https://radharanihandicrafts.com/products/${slug}`;
+  const image =
+    product?.images?.length
+      ? product.images[0]
+      : "https://radharanihandicrafts.com/placeholder-product.jpg";
+
+  return {
+    title: product?.name || "Product Detail | Radha Rani Handicrafts",
+    description:
+      product?.description ||
+      "Handcrafted marble idols by Radha Rani Handicrafts.",
+
+    alternates: {
+      canonical: canonicalUrl, // ✅ CORRECT PLACE
+    },
+
+    openGraph: {
+      title: product?.name,
+      description: product?.description,
+      url: canonicalUrl, // ✅ MATCHES CANONICAL
+      siteName: "Radha Rani Handicrafts",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: product?.name,
+        },
+      ],
+      type: "product",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: product?.name,
+      description: product?.description,
+      images: [image],
+    },
+  };
+}
 
   return {
     title: product?.name || "Product Detail",
