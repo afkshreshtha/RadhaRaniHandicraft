@@ -2,6 +2,8 @@ import { MetadataRoute } from 'next';
 import { sanityClient } from '@/lib/sanity.client';
 import { groq } from 'next-sanity';
 
+export const revalidate = 3600; // Revalidate every hour (in seconds)
+
 type Product = {
   slug: { current: string };
   _updatedAt: string;
