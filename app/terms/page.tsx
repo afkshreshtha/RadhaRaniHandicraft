@@ -67,21 +67,6 @@ export default function TermsAndConditions() {
           <li>We are not responsible for delays, damages, or losses that occur during transit</li>
         </ul>
 
-        <h2 className="text-xl font-semibold mt-6 mb-2">Return Policy</h2>
-        <h3 className="text-lg font-medium mt-4 mb-2">Return Conditions</h3>
-        <ul className="list-disc pl-8 mb-4">
-          <li>Returns must be initiated within 24 hours of receiving the product</li>
-          <li>After 24 hours, all sales are final and no returns will be accepted</li>
-          <li>Customer is responsible for return shipping costs unless the item is defective</li>
-        </ul>
-
-        <h3 className="text-lg font-medium mt-4 mb-2">Return Process</h3>
-        <ul className="list-disc pl-8 mb-4">
-          <li>To initiate a return, contact us via WhatsApp with your order details</li>
-          <li>Items must be returned in original packaging and in unused condition</li>
-          <li>Refunds will be processed within 7-10 business days after we receive the returned item</li>
-        </ul>
-
         <h2 className="text-xl font-semibold mt-6 mb-2">Liability Limitations</h2>
         <ul className="list-disc pl-8 mb-4">
           <li>We are not liable for any indirect, incidental, or consequential damages</li>
@@ -93,7 +78,7 @@ export default function TermsAndConditions() {
         <p className="mb-4">We reserve the right to modify these Terms and Conditions at any time. Changes will be effective immediately upon posting to the website.</p>
 
         <h2 className="text-xl font-semibold mt-6 mb-2">Governing Law</h2>
-        <p className="mb-4">These Terms and Conditions are governed by and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of law principles.</p>
+        <p className="mb-4">These Terms and Conditions are governed by and construed in accordance with the laws of Agra District Court, without regard to its conflict of law principles.</p>
 
         <h2 className="text-xl font-semibold mt-6 mb-2">Contact Information</h2>
         <p className="mb-4">For questions regarding these Terms and Conditions, please contact us through our WhatsApp number listed on the website.</p>

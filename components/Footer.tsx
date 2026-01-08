@@ -72,9 +72,9 @@ export default function Footer() {
             </div>
 
             {/* Social Media - Uncomment when ready */}
-            {/* <div className="flex space-x-4 pt-2">
+            <div className="flex space-x-4 pt-2">
               <a 
-                href="https://instagram.com/yourhandle" 
+                href="https://instagram.com/radharanihandicraftsagra" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 flex items-center justify-center rounded-lg bg-gray-800 hover:bg-gradient-to-r hover:from-yellow-500 hover:to-amber-500 text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110"
@@ -82,7 +82,7 @@ export default function Footer() {
                 <Instagram size={18} />
               </a>
               <a 
-                href="https://facebook.com/yourpage"
+                href="https://www.facebook.com/profile.php?id=61585898116499"
                 target="_blank"
                 rel="noopener noreferrer" 
                 className="w-9 h-9 flex items-center justify-center rounded-lg bg-gray-800 hover:bg-gradient-to-r hover:from-yellow-500 hover:to-amber-500 text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110"
@@ -95,9 +95,9 @@ export default function Footer() {
                 rel="noopener noreferrer" 
                 className="w-9 h-9 flex items-center justify-center rounded-lg bg-gray-800 hover:bg-gradient-to-r hover:from-yellow-500 hover:to-amber-500 text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110"
               >
-                <Youtube size={18} />
+                {/* <IndiaM size={18} /> */}
               </a>
-            </div> */}
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -291,6 +291,13 @@ export default function Footer() {
                 className="hover:text-amber-400 transition-colors duration-200 relative group"
               >
                 Shipping Policy
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-amber-500 group-hover:w-full transition-all duration-300 rounded-full" />
+              </Link>
+              <Link
+                href="/return-policy"
+                className="hover:text-amber-400 transition-colors duration-200 relative group"
+              >
+                Return Policy
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-amber-500 group-hover:w-full transition-all duration-300 rounded-full" />
               </Link>
             </div>
