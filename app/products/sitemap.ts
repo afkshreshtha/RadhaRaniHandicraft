@@ -15,6 +15,7 @@ const PRODUCTS_SITEMAP_QUERY = groq`
     _updatedAt
   }
 `;
+const lastmod = new Date().toISOString();
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://radharanihandicrafts.com';
@@ -23,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return products.map((product) => ({
     url: `${baseUrl}/product/${product.slug.current}`,
-    lastModified: new Date(product._updatedAt),
+    lastModified: lastmod,
     changeFrequency: 'weekly',
     priority: 0.7,
   }));
