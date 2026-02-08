@@ -7,7 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "./provider/providers";
 export const metadata: Metadata = {
-  title: "RadhaRani Handicraft – Handcrafted Marble Deity Idols",
+  title: "RadhaRani Handicrafts – Handcrafted Marble Deity Idols",
   description:
     "Discover premium handcrafted marble idols and murtis of Hindu deities like Radha Krishna, Shiva, Ganesh, and more by Radharani Handicrafts. Ideal for home temples, mandirs, and devotional gifting.",
   keywords:
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "RadhaRani Handicraft – Handcrafted Marble Idols",
+    title: "RadhaRani Handicrafts – Handcrafted Marble Idols",
     description:
       "Elegant and devotional marble deity idols for your home and temple.",
     url: "https://radharanihandicrafts.com",
@@ -88,11 +88,8 @@ export default function RootLayout({
         </Script>
 
         <Providers>
-
-        <main className="pt-16 sm:pt-20 lg:pt-24">
-          {children}
-        </main>
-          </Providers>
+          <main className="pt-16 sm:pt-20 lg:pt-24">{children}</main>
+        </Providers>
 
         <Footer />
       </body>

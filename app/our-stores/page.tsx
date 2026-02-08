@@ -15,23 +15,10 @@ export default function OurStores() {
       phone: "+91 8273366089",
       email: "shreshtha1345@gmail.com",
       hours: "9:00 AM - 7:00 PM",
-      mapEmbedUrl: "https://maps.google.com/maps?q=27.259148,78.0442409&z=15&output=embed",
+      mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3545.967890123456!2d78.04164!3d27.259148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747b0309bca6bb%3A0x3c6a4d435553465c!2sJaipur%20Murti%20Bhandaar!5e0!3m2!1sen!2sin!4v1234567890",
       mapDirectionsUrl: "https://www.google.com/maps/search/jaipur+murti+bhandar+agra/@27.259148,78.0442409,15z",
       description: "Our flagship store featuring the largest collection of handcrafted marble idols and sculptures.",
       badge: "Flagship Store"
-    },
-    {
-      id: 2,
-      name: "Jaipur Murti Bhandar - Haathi Ghat",
-      address: "Near Gurudwara Haathi Ghat, Agra",
-      state: "Uttar Pradesh, India",
-      phone: "+91 9876543210",
-      email: "haathighat@RadhaRaniHandicraft.com",
-      hours: "10:00 AM - 8:00 PM",
-      mapEmbedUrl: "https://maps.google.com/maps?q=27.18485,78.0235667&z=15&output=embed",
-      mapDirectionsUrl: "https://www.google.com/maps/place/Gurudwara+Haathi+Ghat/@27.18485,78.0235667,15z",
-      description: "Our showroom near the historic Haathi Ghat area, offering a wide selection of divine marble sculptures.",
-      badge: "Historic Location"
     },
     {
       id: 3,

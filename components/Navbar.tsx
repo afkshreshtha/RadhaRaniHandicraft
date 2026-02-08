@@ -34,6 +34,7 @@ export default function Navbar() {
     { href: "/categories", label: "Categories" },
     { href: "/about", label: "About Us" },
     { href: "/our-stores", label: "Our Stores" },
+    { href: "/contact", label: "Contact Us" },
   ];
 
   return (

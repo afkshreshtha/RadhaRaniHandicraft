@@ -47,8 +47,8 @@ export const ProductDetail = ({ product }) => {
   const displayProduct = product;
   const productImages = useMemo(
     () =>
-      displayProduct.images ||
-      (displayProduct.image ? [displayProduct.image] : []),
+      displayProduct?.images ||
+      (displayProduct?.image ? [displayProduct?.image] : []),
     [displayProduct]
   );
 
@@ -56,23 +56,23 @@ export const ProductDetail = ({ product }) => {
   const { data: relatedProducts = [], isLoading: relatedLoading } = useQuery({
     queryKey: [
       "relatedProducts",
-      displayProduct.category?._ref,
-      displayProduct._id,
+      displayProduct?.category?._ref,
+      displayProduct?._id,
     ],
     queryFn: () =>
       fetchRelatedProducts(
-        displayProduct.category?._ref || displayProduct.category?._id,
-        displayProduct._id
+        displayProduct?.category?._ref || displayProduct?.category?._id,
+        displayProduct?._id
       ),
-    enabled: !!displayProduct.category,
+    enabled: !!displayProduct?.category,
     staleTime: 5 * 60 * 1000, // 5 minutes
     cacheTime: 10 * 60 * 1000, // 10 minutes
   });
 
   // TanStack Query - Fetch product stats (optional)
   const { data: productStats } = useQuery({
-    queryKey: ["productStats", displayProduct._id],
-    queryFn: () => fetchProductStats(displayProduct._id),
+    queryKey: ["productStats", displayProduct?._id],
+    queryFn: () => fetchProductStats(displayProduct?._id),
     staleTime: 2 * 60 * 1000, // 2 minutes
   });
 
@@ -124,24 +124,24 @@ export const ProductDetail = ({ product }) => {
 
     const message = `Hi, I'm interested in purchasing:
 
-*${displayProduct.name}*
+*${displayProduct?.name}*
 ${productImageUrl ? `🖼 Product Image: ${productImageUrl}\n` : ""}
-💰 Price: ${formatIndianCurrency(displayProduct.price)}${
-      displayProduct.actual_price
+💰 Price: ${formatIndianCurrency(displayProduct?.price)}${
+      displayProduct?.actual_price
         ? ` (${Math.round(
-            ((displayProduct.actual_price - displayProduct.price) /
-              displayProduct.actual_price) *
+            ((displayProduct?.actual_price - displayProduct?.price) /
+              displayProduct?.actual_price) *
               100
           )}% off)`
         : ""
     }
 📦 Quantity: ${quantity}
 ${
-  displayProduct.dimensions
-    ? `📐 Dimensions: ${displayProduct.dimensions.height?.value}${displayProduct.dimensions.height?.unit?.symbol || ""} × ${displayProduct.dimensions.width?.value}${displayProduct.dimensions.width?.unit?.symbol || ""} × ${displayProduct.dimensions.length?.value}${displayProduct.dimensions.length?.unit?.symbol || ""}\n`
+  displayProduct?.dimensions
+    ? `📐 Dimensions: ${displayProduct?.dimensions.height?.value}${displayProduct?.dimensions.height?.unit?.symbol || ""} × ${displayProduct?.dimensions.width?.value}${displayProduct?.dimensions.width?.unit?.symbol || ""} × ${displayProduct?.dimensions.length?.value}${displayProduct?.dimensions.length?.unit?.symbol || ""}\n`
     : ""
 }
-🪵 Material: ${displayProduct.material?.title || ""}
+🪵 Material: ${displayProduct?.material?.title || ""}
 
 Could you provide more details?`;
 
@@ -155,8 +155,8 @@ Could you provide more details?`;
     if (navigator.share) {
       try {
         await navigator.share({
-          title: displayProduct.name,
-          text: `Check out ${displayProduct.name}`,
+          title: displayProduct?.name,
+          text: `Check out ${displayProduct?.name}`,
           url: window.location.href,
         });
       } catch (err) {
@@ -173,10 +173,10 @@ Could you provide more details?`;
     setShowShareMenu(false);
   };
 
-  const discount = displayProduct.actual_price
+  const discount = displayProduct?.actual_price
     ? Math.round(
-        ((displayProduct.actual_price - displayProduct.price) /
-          displayProduct.actual_price) *
+        ((displayProduct?.actual_price - displayProduct?.price) /
+          displayProduct?.actual_price) *
           100
       )
     : 0;
@@ -184,21 +184,21 @@ Could you provide more details?`;
   const productStructuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: displayProduct.name,
+    name: displayProduct?.name,
     image: productImages.map((img) => getImageUrl(img)),
-    description: displayProduct.description,
-    sku: displayProduct._id,
+    description: displayProduct?.description,
+    sku: displayProduct?._id,
     brand: {
       "@type": "Brand",
       name: "Radharani Handicrafts",
     },
     offers: {
       "@type": "Offer",
-      url: `https://yourdomain.com/product/${displayProduct.slug}`,
+      url: `https://yourdomain.com/product/${displayProduct?.slug}`,
       priceCurrency: "INR",
-      price: displayProduct.price,
+      price: displayProduct?.price,
       itemCondition: "https://schema.org/NewCondition",
-      availability: displayProduct.inStock
+      availability: displayProduct?.inStock
         ? "https://schema.org/InStock"
         : "https://schema.org/OutOfStock",
     },
@@ -207,10 +207,10 @@ Could you provide more details?`;
   return (
     <>
       <Head>
-        <title>{displayProduct.name} | Radharani Handicrafts</title>
-        <meta name="description" content={displayProduct.description} />
-        <meta property="og:title" content={displayProduct.name} />
-        <meta property="og:description" content={displayProduct.description} />
+        <title>{displayProduct?.name} | Radharani Handicrafts</title>
+        <meta name="description" content={displayProduct?.description} />
+        <meta property="og:title" content={displayProduct?.name} />
+        <meta property="og:description" content={displayProduct?.description} />
         <meta
           property="og:image"
           content={productImages[0] ? getImageUrl(productImages[0]) : ""}
@@ -274,8 +274,8 @@ Could you provide more details?`;
                 <li className="flex items-center gap-1 sm:gap-2 whitespace-nowrap">
                   <Link
                     href={`/category/${
-                      displayProduct.category?.slug?.current ||
-                      displayProduct.category?.slug ||
+                      displayProduct?.category?.slug?.current ||
+                      displayProduct?.category?.slug ||
                       ""
                     }`}
                     className="px-2.5 py-1 sm:px-3 sm:py-1.5
@@ -285,7 +285,7 @@ Could you provide more details?`;
                      transition-all duration-200
                      border border-transparent hover:border-amber-200 max-w-[120px] sm:max-w-none truncate"
                   >
-                    {displayProduct.category?.title || "Category"}
+                    {displayProduct?.category?.title || "Category"}
                   </Link>
                 </li>
               </ol>
@@ -334,7 +334,7 @@ Could you provide more details?`;
                     >
                       <Image
                         src={getImageUrl(productImages[selectedImage])}
-                        alt={displayProduct.name}
+                        alt={displayProduct?.name}
                         fill
                         className={`object-contain p-4 sm:p-6 transition-all duration-700 group-hover:scale-110 ${
                           imageLoading ? "opacity-0" : "opacity-100"
@@ -370,7 +370,7 @@ Could you provide more details?`;
                   )}
 
                   {/* Featured Badge */}
-                  {displayProduct.featured && (
+                  {displayProduct?.featured && (
                     <div className="absolute bottom-3 left-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-white text-xs sm:text-sm font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 animate-pulse">
                       <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -398,7 +398,7 @@ Could you provide more details?`;
                       >
                         <Image
                           src={getImageUrl(image)}
-                          alt={`${displayProduct.name} - View ${index + 1}`}
+                          alt={`${displayProduct?.name} - View ${index + 1}`}
                           fill
                           className="object-cover"
                           sizes="(max-width: 640px) 25vw, (max-width: 768px) 20vw, 15vw"
@@ -418,22 +418,22 @@ Could you provide more details?`;
               {/* Product Title Section */}
               <div className="mb-4 sm:mb-6">
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 leading-tight mb-3 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text">
-                  {displayProduct.name}
+                  {displayProduct?.name}
                 </h1>
 
                 {/* Category & Tags */}
                 <div className="flex flex-wrap items-center gap-2">
-                  {displayProduct.category && (
+                  {displayProduct?.category && (
                     <Link
-                      href={`/category/${displayProduct.category.slug.current}`}
+                      href={`/category/${displayProduct?.category.slug.current}`}
                       className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-50 to-yellow-50 hover:from-amber-100 hover:to-yellow-100 text-amber-700 text-xs sm:text-sm font-bold px-4 py-2 rounded-full border-2 border-amber-200 hover:border-amber-300 transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
                     >
-                      <span>{displayProduct.category.title}</span>
+                      <span>{displayProduct?.category.title}</span>
                     </Link>
                   )}
-                  {displayProduct.paintingStyle && (
+                  {displayProduct?.paintingStyle && (
                     <span className="inline-flex items-center bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 text-xs sm:text-sm font-bold px-4 py-2 rounded-full border-2 border-blue-200">
-                      {displayProduct.paintingStyle}
+                      {displayProduct?.paintingStyle}
                     </span>
                   )}
                 </div>
@@ -456,14 +456,14 @@ Could you provide more details?`;
                   {/* Main Price */}
                   <div className="mb-4 flex flex-wrap items-end gap-3">
                     <span className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-gray-900">
-                      {formatIndianCurrency(displayProduct.price)}
+                      {formatIndianCurrency(displayProduct?.price)}
                     </span>
 
                     {/* Original Price & Discount */}
-                    {displayProduct.actual_price && (
+                    {displayProduct?.actual_price && (
                       <div className="flex flex-wrap items-center gap-2.5 mb-2">
                         <span className="text-lg sm:text-xl font-semibold text-gray-400 line-through">
-                          {formatIndianCurrency(displayProduct.actual_price)}
+                          {formatIndianCurrency(displayProduct?.actual_price)}
                         </span>
                         <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-green-500 via-emerald-500 to-green-600 px-3 py-1.5 text-xs sm:text-sm font-black text-white shadow-lg shadow-green-200/50 animate-pulse">
                           <svg
@@ -593,7 +593,7 @@ Could you provide more details?`;
 
               {/* Enhanced Specifications Grid */}
               <div className="mb-8 grid grid-cols-2 gap-3 sm:gap-4 animate-fade-in-up animation-delay-700">
-                {displayProduct.material && (
+                {displayProduct?.material && (
                   <div className="group bg-gradient-to-br from-amber-50 to-yellow-50 p-4 sm:p-5 rounded-2xl border-2 border-amber-200 hover:border-amber-400 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1">
                     <div className="flex items-center gap-2 mb-2">
                       <svg
@@ -614,14 +614,14 @@ Could you provide more details?`;
                       </p>
                     </div>
                     <p className="font-black text-base sm:text-lg text-gray-900">
-                      {typeof displayProduct.material === "object"
-                        ? displayProduct.material.title
-                        : displayProduct.material}
+                      {typeof displayProduct?.material === "object"
+                        ? displayProduct?.material.title
+                        : displayProduct?.material}
                     </p>
                   </div>
                 )}
 
-                {displayProduct.dimensions && (
+                {displayProduct?.dimensions && (
                   <div className="group col-span-2 bg-gradient-to-br from-blue-50 to-indigo-50 p-4 sm:p-5 rounded-2xl border-2 border-blue-200 hover:border-blue-400 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1">
                     <div className="flex items-center gap-2 mb-2">
                       <BiRuler className="w-5 h-5 text-blue-600" />
@@ -630,27 +630,27 @@ Could you provide more details?`;
                       </p>
                     </div>
                     <p className="font-black text-base sm:text-lg text-gray-900">
-                      {displayProduct.dimensions.height?.value}
-                      {displayProduct.dimensions.height?.unit?.symbol ||
-                        '"'} × {displayProduct.dimensions.width?.value}
-                      {displayProduct.dimensions.width?.unit?.symbol ||
-                        '"'} × {displayProduct.dimensions.length?.value}
-                      {displayProduct.dimensions.length?.unit?.symbol || '"'}
+                      {displayProduct?.dimensions.height?.value}
+                      {displayProduct?.dimensions.height?.unit?.symbol ||
+                        '"'} × {displayProduct?.dimensions.width?.value}
+                      {displayProduct?.dimensions.width?.unit?.symbol ||
+                        '"'} × {displayProduct?.dimensions.length?.value}
+                      {displayProduct?.dimensions.length?.unit?.symbol || '"'}
                     </p>
                   </div>
                 )}
 
-                {displayProduct.artist && (
+                {displayProduct?.artist && (
                   <div className="group col-span-2 bg-gradient-to-br from-purple-50 to-pink-50 p-4 sm:p-5 rounded-2xl border-2 border-purple-200 hover:border-purple-400 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1">
                     <p className="text-xs text-purple-700 uppercase tracking-wider font-black mb-2">
                       Crafted By
                     </p>
                     <p className="font-black text-base sm:text-lg text-gray-900 mb-1">
-                      {displayProduct.artist.name}
+                      {displayProduct?.artist.name}
                     </p>
-                    {displayProduct.artist.bio && (
+                    {displayProduct?.artist.bio && (
                       <p className="text-xs sm:text-sm text-gray-600 leading-snug">
-                        {displayProduct.artist.bio}
+                        {displayProduct?.artist.bio}
                       </p>
                     )}
                   </div>
@@ -658,14 +658,14 @@ Could you provide more details?`;
               </div>
 
               {/* Description */}
-              {displayProduct.description && (
+              {displayProduct?.description && (
                 <div className="mb-8 animate-fade-in-up animation-delay-800">
                   <h2 className="text-lg sm:text-xl font-black mb-3 text-gray-900 flex items-center gap-2">
                     <span className="w-1.5 h-6 bg-gradient-to-b from-amber-500 to-yellow-500 rounded-full"></span>
                     Description
                   </h2>
                   <p className="text-sm sm:text-base text-gray-700 leading-relaxed bg-gradient-to-br from-gray-50 to-amber-50/30 p-5 rounded-2xl border-2 border-gray-200">
-                    {displayProduct.description}
+                    {displayProduct?.description}
                   </p>
                 </div>
               )}
@@ -741,7 +741,7 @@ Could you provide more details?`;
                   You May Also Like
                 </h2>
                 <Link
-                  href={`/category/${displayProduct.category?.slug?.current}`}
+                  href={`/category/${displayProduct?.category?.slug?.current}`}
                   className="text-sm font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1 transition-colors"
                 >
                   View All
