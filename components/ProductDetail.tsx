@@ -14,6 +14,7 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "@/sanity.cli";
+import { PortableText } from "next-sanity";
 
 // Fetch related products
 const fetchRelatedProducts = async (
@@ -664,9 +665,7 @@ Could you provide more details?`;
                     <span className="w-1.5 h-6 bg-gradient-to-b from-amber-500 to-yellow-500 rounded-full"></span>
                     Description
                   </h2>
-                  <p className="text-sm sm:text-base text-gray-700 leading-relaxed bg-gradient-to-br from-gray-50 to-amber-50/30 p-5 rounded-2xl border-2 border-gray-200">
-                    {displayProduct?.description}
-                  </p>
+                  <PortableText value={displayProduct?.description} />
                 </div>
               )}
 

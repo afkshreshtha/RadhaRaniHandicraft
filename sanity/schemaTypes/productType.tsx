@@ -13,7 +13,10 @@ export const product = defineType({
     defineField({
       name: "description",
       title: "Product Description",
-      type: 'aiDescription',
+      type: 'array',
+      of: [
+        { type: 'block' }
+      ]
     }),
     
     defineField({
