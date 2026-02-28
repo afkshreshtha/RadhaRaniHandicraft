@@ -9,6 +9,7 @@ export function resolveInput(props: InputProps) {
   if (schemaType.name === 'aiDescription') {
     return AIProductDescription
   }
+
   
   return undefined
 }

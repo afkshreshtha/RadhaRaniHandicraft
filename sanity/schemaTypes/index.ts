@@ -4,6 +4,8 @@ import { category } from './categorySchema'
 import { material } from './MaterialSchema'
 import { measurement } from './measurementTypes'
 import aiDescriptionSchema from './aiDescriptionSchema'
+import  { blogCategorySchema } from './BlogCategorySchema'
+import post from './post'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -11,6 +13,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     category,
     material,
     measurement,
+    post,
+    blogCategorySchema,
     aiDescriptionSchema
   ],
 }
