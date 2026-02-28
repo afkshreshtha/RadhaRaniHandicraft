@@ -66,7 +66,7 @@ Structure rules:
 Rules:
 - metaDescription must be 150-160 characters, plain text, no quotes
 - Spiritual, devotional tone for Indian handicraft brand
-- 800-1000 words across all blocks
+- 600 words across all blocks
 - At least 4 paragraphs, 3 numbered points, 5 FAQ items
 - No markdown formatting inside text values (no **, no #, no -)
 - All text values must be plain strings
