@@ -34,7 +34,8 @@ async function getPost(slug: string) {
         "readTime": round(length(pt::text(content)) / 5 / 180)
       }
     }`,
-    { slug }
+    { slug },
+ { next: { tags: ["post"], revalidate: 60 } }
   )
 }
 
@@ -50,7 +51,8 @@ async function getPostSEO(slug: string) {
       category,
       "author": author->name
     }`,
-    { slug }
+    { slug },
+   { next: { tags: ["post"], revalidate: 60 } }
   )
 }
 export async function generateMetadata({

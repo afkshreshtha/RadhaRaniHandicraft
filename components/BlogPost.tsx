@@ -42,13 +42,27 @@ function formatDate(dateStr?: string, long = false) {
 
 // ── Icons ──────────────────────────────────────────────────────────────────────
 const SearchIcon = () => (
-  <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+  <svg
+    width="16"
+    height="16"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+  >
     <circle cx="11" cy="11" r="8" />
     <path d="m21 21-4.35-4.35" />
   </svg>
 );
 const ArrowIcon = ({ size = 16 }: { size?: number }) => (
-  <svg width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+  <svg
+    width={size}
+    height={size}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    viewBox="0 0 24 24"
+  >
     <path d="M7 17 17 7M7 7h10v10" />
   </svg>
 );
@@ -61,7 +75,14 @@ const GridIcon = () => (
   </svg>
 );
 const ListIcon = () => (
-  <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+  <svg
+    width="14"
+    height="14"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+  >
     <line x1="3" y1="6" x2="21" y2="6" />
     <line x1="3" y1="12" x2="21" y2="12" />
     <line x1="3" y1="18" x2="21" y2="18" />
@@ -69,7 +90,13 @@ const ListIcon = () => (
 );
 
 // ── Card Meta ─────────────────────────────────────────────────────────────────
-function CardMeta({ post, compact = false }: { post: Post; compact?: boolean }) {
+function CardMeta({
+  post,
+  compact = false,
+}: {
+  post: Post;
+  compact?: boolean;
+}) {
   const date = formatDate(post.publishedAt, !compact);
   return (
     <div className="flex items-center gap-2 flex-wrap">
@@ -78,16 +105,22 @@ function CardMeta({ post, compact = false }: { post: Post; compact?: boolean }) 
           {post.category}
         </span>
       )}
-      {post.category && date && <span className="w-1 h-1 rounded-full bg-stone-300" />}
+      {post.category && date && (
+        <span className="w-1 h-1 rounded-full bg-stone-300" />
+      )}
       {date && (
-        <span className={`text-stone-400 ${compact ? "text-[11px]" : "text-xs"}`}>
+        <span
+          className={`text-stone-400 ${compact ? "text-[11px]" : "text-xs"}`}
+        >
           {date}
         </span>
       )}
       {post.readTime && (
         <>
           <span className="w-1 h-1 rounded-full bg-stone-300" />
-          <span className={`text-stone-400 ml-auto ${compact ? "text-[11px]" : "text-xs"}`}>
+          <span
+            className={`text-stone-400 ml-auto ${compact ? "text-[11px]" : "text-xs"}`}
+          >
             {post.readTime} min read
           </span>
         </>
@@ -97,7 +130,15 @@ function CardMeta({ post, compact = false }: { post: Post; compact?: boolean }) 
 }
 
 // ── Image Block ────────────────────────────────────────────────────────────────
-function PostImage({ post, width, className = "" }: { post: Post; width: number; className?: string }) {
+function PostImage({
+  post,
+  width,
+  className = "",
+}: {
+  post: Post;
+  width: number;
+  className?: string;
+}) {
   return (
     <div className={`overflow-hidden bg-stone-100 ${className}`}>
       {post.featuredImage ? (
@@ -122,7 +163,11 @@ function FeaturedCard({ post }: { post: Post }) {
       href={`/blog/${post.slug.current}`}
       className="group col-span-full grid md:grid-cols-2 border border-stone-200 overflow-hidden hover:bg-amber-50/40 transition-colors duration-200"
     >
-      <PostImage post={post} width={900} className="aspect-video md:aspect-auto md:min-h-[380px]" />
+      <PostImage
+        post={post}
+        width={900}
+        className="aspect-video md:aspect-auto md:min-h-[380px]"
+      />
       <div className="flex flex-col justify-center gap-4 p-8 md:p-12">
         <div>
           <span className="inline-flex text-[10px] font-semibold tracking-[0.2em] uppercase text-amber-700 border border-amber-200 bg-amber-50 px-3 py-1 rounded-full">
@@ -133,7 +178,9 @@ function FeaturedCard({ post }: { post: Post }) {
         <h2 className="font-serif text-3xl md:text-4xl font-light leading-tight tracking-tight text-stone-900">
           {post.title}
         </h2>
-        <p className="text-sm leading-relaxed text-stone-500 line-clamp-3">{post.excerpt}</p>
+        <p className="text-sm leading-relaxed text-stone-500 line-clamp-3">
+          {post.excerpt}
+        </p>
         <div className="flex items-center justify-between pt-4 border-t border-stone-100 mt-auto">
           <span className="text-[11px] font-semibold tracking-[0.12em] uppercase text-stone-800">
             Read Article
@@ -160,7 +207,9 @@ function GridCard({ post }: { post: Post }) {
         <h2 className="font-serif text-xl font-normal leading-snug tracking-tight text-stone-900 group-hover:text-amber-900 transition-colors">
           {post.title}
         </h2>
-        <p className="text-[13px] leading-relaxed text-stone-500 line-clamp-3 flex-1">{post.excerpt}</p>
+        <p className="text-[13px] leading-relaxed text-stone-500 line-clamp-3 flex-1">
+          {post.excerpt}
+        </p>
         <div className="flex items-center justify-between pt-4 border-t border-stone-100">
           <span className="text-[10px] font-semibold tracking-[0.12em] uppercase text-stone-700">
             Read Article
@@ -219,13 +268,19 @@ export default function BlogPage({ posts }: { posts: Post[] }) {
       result = result.filter(
         (p) =>
           p.title.toLowerCase().includes(search.toLowerCase()) ||
-          p.excerpt?.toLowerCase().includes(search.toLowerCase())
+          p.excerpt?.toLowerCase().includes(search.toLowerCase()),
       );
     result.sort((a, b) => {
       if (sort === "newest")
-        return new Date(b.publishedAt ?? 0).getTime() - new Date(a.publishedAt ?? 0).getTime();
+        return (
+          new Date(b.publishedAt ?? 0).getTime() -
+          new Date(a.publishedAt ?? 0).getTime()
+        );
       if (sort === "oldest")
-        return new Date(a.publishedAt ?? 0).getTime() - new Date(b.publishedAt ?? 0).getTime();
+        return (
+          new Date(a.publishedAt ?? 0).getTime() -
+          new Date(b.publishedAt ?? 0).getTime()
+        );
       if (sort === "az") return a.title.localeCompare(b.title);
       if (sort === "za") return b.title.localeCompare(a.title);
       return 0;
@@ -244,10 +299,11 @@ export default function BlogPage({ posts }: { posts: Post[] }) {
       `}</style>
 
       {/* ── Hero ── */}
-      <header className="relative bg-stone-100 border-b border-stone-200 px-6 md:px-10 pt-16 pb-12 overflow-hidden">
-        {/* watermark — changed to BLOG */}
+      {/* ── Hero ── */}
+      <header className="relative bg-stone-100 border-b border-stone-200 px-6 md:px-10 pt-14 pb-10 overflow-hidden">
+        {/* watermark */}
         <span
-          className="absolute right-0 top-1/2 -translate-y-1/2 font-serif font-light leading-none tracking-widest select-none pointer-events-none text-transparent"
+          className="absolute right-0 top-1/2 -translate-y-1/2 font-serif font-light leading-none tracking-widest select-none pointer-events-none text-transparent hidden sm:block"
           style={{
             fontSize: "clamp(60px, 12vw, 140px)",
             WebkitTextStroke: "1px #d4cfc8",
@@ -255,20 +311,20 @@ export default function BlogPage({ posts }: { posts: Post[] }) {
         >
           BLOG
         </span>
-        {/* label — changed to "Blog" */}
+
         <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-amber-700 mb-4">
           Blog
         </p>
-        {/* headline — updated to reflect spiritual handicrafts content */}
+
         <h1
-          className="font-serif font-light leading-none tracking-tight max-w-lg"
-          style={{ fontSize: "clamp(36px, 6vw, 72px)" }}
+          className="font-serif font-light leading-[1.1] tracking-tight max-w-lg"
+          style={{ fontSize: "clamp(32px, 8vw, 72px)" }}
         >
           Spiritual <span className="italic text-amber-800">Insights</span>
-          <br />& Sacred Stories
+          <br />
+          &amp; Sacred Stories
         </h1>
       </header>
-
       {/* ── Category Pills ── */}
       <div className="flex gap-2 flex-wrap px-6 md:px-10 py-5 border-b border-stone-200 bg-stone-50">
         {categories?.map((cat) => (
@@ -316,7 +372,14 @@ export default function BlogPage({ posts }: { posts: Post[] }) {
             ))}
           </select>
           <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400">
-            <svg width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <svg
+              width="10"
+              height="10"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              viewBox="0 0 24 24"
+            >
               <path d="m6 9 6 6 6-6" />
             </svg>
           </span>
@@ -359,9 +422,15 @@ export default function BlogPage({ posts }: { posts: Post[] }) {
       {/* ── Posts ── */}
       {filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-28 gap-3 text-center px-6">
-          <span className="font-serif text-6xl font-light text-stone-200">✦</span>
-          <h3 className="font-serif text-3xl font-light text-stone-400">No articles found</h3>
-          <p className="text-sm text-stone-400">Try adjusting your filters or search query.</p>
+          <span className="font-serif text-6xl font-light text-stone-200">
+            ✦
+          </span>
+          <h3 className="font-serif text-3xl font-light text-stone-400">
+            No articles found
+          </h3>
+          <p className="text-sm text-stone-400">
+            Try adjusting your filters or search query.
+          </p>
         </div>
       ) : layout === "grid" ? (
         <div className="px-6 md:px-10 py-6 pb-20 grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-stone-200">

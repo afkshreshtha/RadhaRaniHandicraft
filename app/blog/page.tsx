@@ -1,13 +1,14 @@
-import BlogPage from "@/components/BlogPost"
-import { client } from "@/sanity.cli"
-import type { Metadata } from "next"
+import BlogPage from "@/components/BlogPost";
+import { client } from "@/sanity.cli";
+import type { Metadata } from "next";
 
 // ── SEO Metadata ──────────────────────────────────────────────────────────────
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://radharanihandicrafts.com"
-const SITE_NAME = "Radha Rani Handicrafts"
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://radharanihandicrafts.com";
+const SITE_NAME = "Radha Rani Handicrafts";
 
 export const metadata: Metadata = {
-  title: "Blog",   // template in layout.tsx adds "| Radha Rani Handicrafts" automatically
+  title: "Blog", // template in layout.tsx adds "| Radha Rani Handicrafts" automatically
   description:
     "Explore articles on Radha Krishna idols, Hanuman statues, puja room setup, brass vs marble idols, and the spiritual significance of Indian handicrafts.",
 
@@ -51,11 +52,12 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-}
+};
 
 // ── Data Fetching ─────────────────────────────────────────────────────────────
 async function getPosts() {
-  return await client.fetch(`
+  return await client.fetch(
+    `
     *[_type == "post"] | order(publishedAt desc) {
       _id,
       title,
@@ -67,11 +69,15 @@ async function getPosts() {
       "category": categories[0]->title,
       "readTime": round(length(pt::text(content)) / 5 / 180)
     }
-  `)
+      
+  `,
+    {},
+   { next: { tags: ["post"], revalidate: 60 } },
+  );
 }
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default async function Page() {
-  const posts = await getPosts()
-  return <BlogPage posts={posts} />
+  const posts = await getPosts();
+  return <BlogPage posts={posts} />;
 }
