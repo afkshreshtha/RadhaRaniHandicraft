@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /_next/
+Disallow: /static/
+
+Disallow: /*?*
+
+Sitemap: https://radharanihandicrafts.com/sitemap.xml
