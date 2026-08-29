@@ -102,7 +102,8 @@ Homepage <img width="1895" height="940" alt="Radha Rani Handicrafts homepage" sr
 
 Product Catalog <img width="1895" height="937" alt="Radha Rani Handicrafts product page" src="https://github.com/user-attachments/assets/759dea23-ebfa-46fd-9890-005a3745e4dc" />
 
-Product Detail Page <img width="1896" height="902" alt="Radha Rani Handicrafts website" src="https://github.com/user-attachments/assets/7ee7a2ad-70de-4113-bb95-205f3970be4c" />
+Product Detail Page <img width="1899" height="947" alt="image" src="https://github.com/user-attachments/assets/2782d768-a8e5-4891-8df0-a4b4f9c85c31" />
+
 
 ## What I Built
 
